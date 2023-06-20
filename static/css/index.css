@@ -38,12 +38,23 @@ a {
     height: 5rem;
 }
 
+.flashed-message {
+    background: red;
+    width: 25rem;
+    height: 3rem;
+    color: white;
+}
+
 .uploader {
     margin: 0 4rem;
 }
 
+.hidden {
+    display: none;
+}
+
 .button {
-    width: 10rem;
+    width: 14rem;
     height: 3.5rem;
     display: flex;
     align-items: center;
@@ -56,10 +67,6 @@ a {
     color: #e8e8e8;
     background-color: transparent;
     transition: background-color 0.2s, color 0.2s;
-}
-
-.big-button {
-    width: 14rem;
 }
 
 .button:hover {
@@ -79,6 +86,8 @@ a {
 
 .dropdown-options {
     /* hidden by default */
+    position: absolute;
+    width: 12rem;
     display: none;
     background-color: #e8e8e8;
     color: #434d57;
@@ -94,4 +103,32 @@ a {
 .dropdown-options p:hover {
     cursor: pointer;
     padding-left: 1rem;
+}
+
+.confirm {
+    position: absolute;
+    top: 90%;
+}
+
+.folder-generation {
+    display: flex;
+    margin-top: 2rem;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.folder-generation h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 28px;
+}
+
+.folder-name {
+    width: 25rem;
+    height: 2.5rem;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: none;
+    color: #434d57;
 }

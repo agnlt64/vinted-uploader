@@ -8,8 +8,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="{{ url_for('static', filename='media/upload.png') }}" type="image/x-icon">
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
 </head>
-<body>
+<body id="body">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    <div class="flashed-message" id="message">
+                        <p>{{ message }}</p>
+                    </div>
+                    <img class="close-message" id="close-message" src="{{ url_for('static', filename='media/close.png') }}" alt="close button" onclick="document.getElementById('close-message').style.display = 'none';document.getElementById('message').style.display = 'none'">
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
     <section class="title">
         <img src="{{ url_for('static', filename='media/upload.png') }}" class="logo" alt="website logo">
         <h1>Vinted Uploader</h1>
@@ -20,11 +33,11 @@
         <form class="container">
             <div class="infos">
                 <div class="dropdown">
-                    <button type="button" class="button big-button dropdown-button">
+                    <button type="button" class="button dropdown-button">
                         <span>Type du vêtement</span>
                         <i class='bx bxs-down-arrow'></i>
                     </button>
-                    <div class="dropdown-options">
+                    <div class="dropdown-options" data-refers-to="type">
                         <p>Jean</p>
                         <p>Polo</p>
                         <p>Tee-shirt</p>
@@ -34,6 +47,7 @@
                         <p>Pyjama</p>
                         <p>Bermuda</p>
                         <p>Jogging</p>
+                        <input type="text" class="hidden" name="type" id="type">
                     </div>
                 </div>
 
@@ -42,7 +56,7 @@
                         <span>Marque</span>
                         <i class='bx bxs-down-arrow'></i>
                     </button>
-                    <div class="dropdown-options">
+                    <div class="dropdown-options" data-refers-to="brand">
                         <p>Atlas for Men</p>
                         <p>Kiabi</p>
                         <p>Tissaia</p>
@@ -51,6 +65,7 @@
                         <p>LH</p>
                         <p>Kaporal</p>
                         <p>Nike</p>
+                        <input type="text" class="hidden" name="brand" id="brand">
                     </div>
                 </div>
 
@@ -59,7 +74,7 @@
                         <span>Couleur</span>
                         <i class='bx bxs-down-arrow'></i>
                     </button>
-                    <div class="dropdown-options">
+                    <div class="dropdown-options" data-refers-to="color">
                         <p>Bleu</p>
                         <p>Noir</p>
                         <p>Orange</p>
@@ -69,6 +84,7 @@
                         <p>Gris</p>
                         <p>Blanc</p>
                         <p>Marron</p>
+                        <input type="text" class="hidden" name="color" id="color">
                     </div>
                 </div>
 
@@ -77,19 +93,25 @@
                         <span>Etat</span>
                         <i class='bx bxs-down-arrow'></i>
                     </button>
-                    <div class="dropdown-options">
+                    <div class="dropdown-options" data-refers-to="quality">
                         <p>Excellent</p>
                         <p>Bon</p>
                         <p>Mauvais</p>
+                        <input type="text" class="hidden" name="quality" id="quality">
                     </div>
                 </div>
             </div>
 
-            <div class="pictures">
-                <button type="submit" class="button big-button">Ajouter des photos</button>
+            <section class="folder-generation">
+                <h2>Dossier généré</h2>
+                <input type="text" class="folder-name" id="generated-folder-name" disabled>
+            </section>
+
+            <!-- <div class="pictures">
+                <button type="submit" class="button">Ajouter des photos</button>
                 <div class="images-container"></div>
-            </div>
-            <button type="submit" class="button">Confirmer</button>
+            </div> -->
+            <button type="submit" class="button confirm" hx-post="/upload-item" hx-swap="innerHTML" hx-target="#body">Confirmer</button>
         </form>
     </section>
 
