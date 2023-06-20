@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+@font-face {
+    font-family: 'Vegan Style';
+    font-weight: 400;
+    src: url('/static/fonts/veganstyle-webfont.woff') format('woff'), url('/static/fonts/veganstyle-webfont.woff2') format('woff2');
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #434d57;
+    color: #bcbcbc;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5px 25px;
+}
+
+.title h1 {
+    font-family: 'Vegan Style', sans-serif;
+    font-size: 40px;
+    color: #1fd0b5;
+}
+
+.logo {
+    aspect-ratio: 1/1;
+    height: 5rem;
+}
+
+.uploader {
+    margin: 0 4rem;
+}
+
+.button {
+    width: 10rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 6px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid #e8e8e8;
+    color: #e8e8e8;
+    background-color: transparent;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.big-button {
+    width: 14rem;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: #e8e8e8;
+    color: #434d57;
+}
+
+.infos-title {
+    font-size: 38px;
+}
+
+.infos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-options {
+    /* hidden by default */
+    display: none;
+    background-color: #e8e8e8;
+    color: #434d57;
+    border-radius: 8px;
+    padding: 5px 15px;
+}
+
+.dropdown-options p {
+    height: 2rem;
+    transition: padding-left 0.2s;
+}
+
+.dropdown-options p:hover {
+    cursor: pointer;
+    padding-left: 1rem;
+}

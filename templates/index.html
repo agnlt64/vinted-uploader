@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinted Uploader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media/upload.png') }}" type="image/x-icon">
+</head>
+<body>
+    <section class="title">
+        <img src="{{ url_for('static', filename='media/upload.png') }}" class="logo" alt="website logo">
+        <h1>Vinted Uploader</h1>
+    </section>
+
+    <section class="uploader">
+        <h2 class="infos-title">Infos sur le vêtement</h2>
+        <form class="container">
+            <div class="infos">
+                <div class="dropdown">
+                    <button type="button" class="button big-button dropdown-button">
+                        <span>Type du vêtement</span>
+                        <i class='bx bxs-down-arrow'></i>
+                    </button>
+                    <div class="dropdown-options">
+                        <p>Jean</p>
+                        <p>Polo</p>
+                        <p>Tee-shirt</p>
+                        <p>Chemise</p>
+                        <p>Baskets</p>
+                        <p>Sous-pull</p>
+                        <p>Pyjama</p>
+                        <p>Bermuda</p>
+                        <p>Jogging</p>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button type="button" class="button dropdown-button">
+                        <span>Marque</span>
+                        <i class='bx bxs-down-arrow'></i>
+                    </button>
+                    <div class="dropdown-options">
+                        <p>Atlas for Men</p>
+                        <p>Kiabi</p>
+                        <p>Tissaia</p>
+                        <p>Decathlon</p>
+                        <p>Puma</p>
+                        <p>LH</p>
+                        <p>Kaporal</p>
+                        <p>Nike</p>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button type="button" class="button dropdown-button">
+                        <span>Couleur</span>
+                        <i class='bx bxs-down-arrow'></i>
+                    </button>
+                    <div class="dropdown-options">
+                        <p>Bleu</p>
+                        <p>Noir</p>
+                        <p>Orange</p>
+                        <p>Rouge</p>
+                        <p>Vert</p>
+                        <p>Jaune</p>
+                        <p>Gris</p>
+                        <p>Blanc</p>
+                        <p>Marron</p>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button type="button" class="button dropdown-button">
+                        <span>Etat</span>
+                        <i class='bx bxs-down-arrow'></i>
+                    </button>
+                    <div class="dropdown-options">
+                        <p>Excellent</p>
+                        <p>Bon</p>
+                        <p>Mauvais</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pictures">
+                <button type="submit" class="button big-button">Ajouter des photos</button>
+                <div class="images-container"></div>
+            </div>
+            <button type="submit" class="button">Confirmer</button>
+        </form>
+    </section>
+
+</body>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</html>
