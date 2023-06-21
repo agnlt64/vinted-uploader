@@ -6,11 +6,11 @@ db = SQLAlchemy()
 
 class VintedItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(100))
-    color = db.Column(db.String(100))
-    brand = db.Column(db.String(100))
-    size = db.Column(db.String(5))
-    quality = db.Column(db.String(2))
+    type = db.Column(db.String(100), nullable=False)
+    color = db.Column(db.String(100), nullable=False)
+    brand = db.Column(db.String(100), nullable=False)
+    size = db.Column(db.String(5), nullable=False)
+    quality = db.Column(db.String(2), nullable=False)
     code = db.Column(db.String(10), unique=True)
 
 app = Flask(__name__)
@@ -33,12 +33,16 @@ def uploae_item():
         brand = request.form.get('brand')
         color = request.form.get('color')
         quality = request.form.get('quality')
-        new_item = VintedItem(type=type, brand=brand, size='none', color=color, quality=quality)
-        db.session.add(new_item)
-        db.session.commit()
-        flash('Item added succssfully!')
+        if type == "" or brand == "" or color == "" or quality == "":
+            flash('Tous les champs sont requis!', category='error')
+            return render_template('index.html')
+        else:
+            new_item = VintedItem(type=type, brand=brand, size='none', color=color, quality=quality)
+            db.session.add(new_item)
+            db.session.commit()
+        flash('Item ajouté!', category='success')
 
-    return redirect(url_for('index'))
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

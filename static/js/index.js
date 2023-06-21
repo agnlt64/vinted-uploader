@@ -1,6 +1,6 @@
-const allDropdowns = document.querySelectorAll('.dropdown-button')
-const allOptions = document.querySelectorAll('.dropdown-options')
-const generatedFolderInput = document.getElementById('generated-folder-name')
+allDropdowns = document.querySelectorAll('.dropdown-button')
+allOptions = document.querySelectorAll('.dropdown-options')
+generatedFolderInput = document.getElementById('generated-folder-name')
 
 allOptions.forEach(options => {
     for (const p of options.children) {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinted Uploader</title>
+    {% block style %}
+    {% endblock %}
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media/upload.png') }}" type="image/x-icon">
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+</head>
+<body id="body">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="message-container">
+                {% for category, message in messages %}
+                    <div class="flashed-message {{ category }}" id="message">
+                        <p>{{ message }}</p>
+                    </div>
+                    <img class="close-message" id="close-message" src="{{ url_for('static', filename='media/close.png') }}" alt="close button" onclick="document.getElementById('close-message').style.display = 'none';document.getElementById('message').style.display = 'none'">
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <section class="title">
+        <img src="{{ url_for('static', filename='media/upload.png') }}" class="logo" alt="website logo">
+        <h1>Vinted Uploader</h1>
+    </section>
+
+    {% block content %}
+    {% endblock %}
+</body>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</html>

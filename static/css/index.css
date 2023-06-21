@@ -38,11 +38,41 @@ a {
     height: 5rem;
 }
 
+.success {
+    --color: green;
+}
+
+.error {
+    --color: red;
+}
+
+.message-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.close-message {
+    aspect-ratio: 1/1;
+    height: 1.5rem;
+}
+
+.message-container:hover {
+    cursor: pointer;
+}
+
 .flashed-message {
-    background: red;
+    background: var(--color);
     width: 25rem;
     height: 3rem;
     color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 10px 10px;
 }
 
 .uploader {
@@ -105,9 +135,13 @@ a {
     padding-left: 1rem;
 }
 
-.confirm {
+.bottom {
     position: absolute;
     top: 90%;
+}
+
+.see-all {
+    left: 17%;
 }
 
 .folder-generation {
