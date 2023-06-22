@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="uploader">
+<section class="uploader" id="uploader" data-folder-name="{{ folder_name }}">
     <h2 class="infos-title">Infos sur le vêtement</h2>
     <form class="container">
         <div class="infos">
@@ -43,6 +43,22 @@
                     <p>Kaporal</p>
                     <p>Nike</p>
                     <input type="text" class="hidden" name="brand" id="brand">
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button type="button" class="button dropdown-button">
+                    <span>Taille</span>
+                    <i class='bx bxs-down-arrow'></i>
+                </button>
+                <div class="dropdown-options" data-refers-to="size">
+                    <p>L</p>
+                    <p>M</p>
+                    <p>S</p>
+                    <p>42</p>
+                    <p>40</p>
+                    <p>38</p>
+                    <input type="text" class="hidden" name="size" id="size">
                 </div>
             </div>
 

@@ -1,6 +1,9 @@
 allDropdowns = document.querySelectorAll('.dropdown-button')
 allOptions = document.querySelectorAll('.dropdown-options')
 generatedFolderInput = document.getElementById('generated-folder-name')
+folderName = document.getElementById('uploader').getAttribute('data-folder-name')
+
+generatedFolderInput.value = folderName
 
 allOptions.forEach(options => {
     for (const p of options.children) {
@@ -20,7 +23,6 @@ allOptions.forEach(options => {
                     icon.className = 'bx bxs-down-arrow'
                 }
             }
-            generatedFolderInput.value = p.innerHTML
         })
     }
 })

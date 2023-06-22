@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import secrets
 
+from utils import parse_type, parse_brand, parse_quality, generate_code, generate_folder_name
+
 db = SQLAlchemy()
 
 class VintedItem(db.Model):
@@ -27,21 +29,32 @@ def index():
     return render_template('index.html')
 
 @app.route('/items/upload', methods=['POST'])
-def uploae_item():
-    if request.method == 'POST':
-        type = request.form.get('type')
-        brand = request.form.get('brand')
-        color = request.form.get('color')
-        quality = request.form.get('quality')
-        if type == "" or brand == "" or color == "" or quality == "":
-            flash('Tous les champs sont requis!', category='error')
-            return render_template('index.html')
-        else:
-            new_item = VintedItem(type=type, brand=brand, size='none', color=color, quality=quality)
-            db.session.add(new_item)
-            db.session.commit()
+def upload_item():
+    type = parse_type(request.form.get('type'))
+    brand = parse_brand(request.form.get('brand'))
+    color = request.form.get('color').lower()
+    size = request.form.get('size')
+    quality = parse_quality(request.form.get('quality'))
+    folder_name = generate_folder_name(type, color, size, brand, quality)
+    code = generate_code(folder_name)
+    code_list = VintedItem.query.with_entities(VintedItem.code).all()
+    for c in code_list:
+        if code == c[0]:
+            if code[-1].isdigit():
+                # the code already existed and we increment the counter at the end of the code
+                code = list(code)
+                code[-1] = str(int(code[-1]) + 1)
+                code = ''.join(code)
+            else:
+                code += '2'
+    if type == "" or brand == "" or color == "" or quality == "" or size == "":
+        flash('Tous les champs sont requis!', category='error')
+    else:
+        new_item = VintedItem(type=type, brand=brand, size=size, color=color, quality=quality, code=code)
+        db.session.add(new_item)
+        db.session.commit()
         flash('Item ajouté!', category='success')
-    return render_template('index.html')
+    return render_template('index.html', folder_name=folder_name + '_' + code)
 
 @app.route('/items/all')
 def all_items():
