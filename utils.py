@@ -68,7 +68,7 @@ def parse_brand(brand: str) -> str:
 def parse_quality(quality: str) -> str:
     return '' if quality == '' else quality.lower()
 
-def generate_folder_name(type: str, color: str, size: str | int, brand: str, quality: str) -> str:
+def generate_folder_name(type: str, color: str, size: str, brand: str, quality: str) -> str:
     return f'{type}_{color}_{str(size)}_{brand}_{quality}'
 
 def generate_code(folder_name: str) -> str:
