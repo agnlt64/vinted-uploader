@@ -24,7 +24,7 @@
             </div>
         {% endif %}
     {% endwith %}
-    <section class="title">
+    <section class="title" hx-get="/" hx-target="#body" hx-swap="innerHTML">
         <img src="{{ url_for('static', filename='media/upload.png') }}" class="logo" alt="website logo">
         <h1>Vinted Uploader</h1>
     </section>

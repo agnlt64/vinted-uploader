@@ -26,7 +26,7 @@ with app.app_context():
 def index():
     return render_template('index.html')
 
-@app.route('/upload-item', methods=['POST'])
+@app.route('/items/upload', methods=['POST'])
 def uploae_item():
     if request.method == 'POST':
         type = request.form.get('type')
@@ -41,8 +41,11 @@ def uploae_item():
             db.session.add(new_item)
             db.session.commit()
         flash('Item ajouté!', category='success')
-
     return render_template('index.html')
+
+@app.route('/items/all')
+def all_items():
+    return render_template('all_items.html', items=VintedItem.query.all())
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
