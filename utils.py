@@ -40,9 +40,10 @@ QUALITY = {
 }
 
 def parse_type(type: str) -> str:
-    if type is None: return ''
+    if type == '': return ''
     type_split = type.split(' ')
     if len(type_split) == 1:
+        type_split = type.split('-')
         return ''.join(type_split).lower()
     else:
         final = ''
@@ -54,7 +55,7 @@ def parse_type(type: str) -> str:
         return final
 
 def parse_brand(brand: str) -> str:
-    if brand is None: return ''
+    if brand == '': return ''
     brand = brand.split(' ')
     final = ''
     for word in brand:
@@ -65,7 +66,7 @@ def parse_brand(brand: str) -> str:
     return final
 
 def parse_quality(quality: str) -> str:
-    return '' if quality is None else quality.lower()
+    return '' if quality == '' else quality.lower()
 
 def generate_folder_name(type: str, color: str, size: str | int, brand: str, quality: str) -> str:
     return f'{type}_{color}_{str(size)}_{brand}_{quality}'

@@ -35,29 +35,45 @@ def upload_item():
     color = request.form.get('color').lower()
     size = request.form.get('size')
     quality = parse_quality(request.form.get('quality'))
-    folder_name = generate_folder_name(type, color, size, brand, quality)
-    code = generate_code(folder_name)
-    code_list = VintedItem.query.with_entities(VintedItem.code).all()
-    for c in code_list:
-        if code == c[0]:
-            if code[-1].isdigit():
-                # the code already existed and we increment the counter at the end of the code
-                code = list(code)
-                code[-1] = str(int(code[-1]) + 1)
-                code = ''.join(code)
-            else:
-                code += '2'
+
     if type == "" or brand == "" or color == "" or quality == "" or size == "":
         flash('Tous les champs sont requis!', category='error')
+        folder_name = ''
+        code = ''
     else:
+        folder_name = generate_folder_name(type, color, size, brand, quality)
+        code = generate_code(folder_name)
+        code_list = VintedItem.query.with_entities(VintedItem.code).all()
+        for c in code_list:
+            if code == c[0]:
+                if code[-1].isdigit():
+                    # the code already existed and we increment the counter at the end of the code
+                    code = list(code)
+                    code[-1] = str(int(code[-1]) + 1)
+                    code = ''.join(code)
+                else:
+                    code += '2'
         new_item = VintedItem(type=type, brand=brand, size=size, color=color, quality=quality, code=code)
         db.session.add(new_item)
         db.session.commit()
         flash('Item ajouté!', category='success')
+    if folder_name == '' and code == '':
+        return render_template('index.html', folder_name='')
     return render_template('index.html', folder_name=folder_name + '_' + code)
 
 @app.route('/items/all')
 def all_items():
+    return render_template('all_items.html', items=VintedItem.query.all())
+
+@app.route('/items/delete/<id>', methods=['DELETE'])
+def delete_item(id):
+    VintedItem.query.filter_by(id=id).delete()
+    db.session.commit()
+    return render_template('all_items.html', items=VintedItem.query.all())
+
+@app.route('/items/delete/all', methods=['DELETE'])
+def delete_all_items():
+    db.session.query(VintedItem).delete()
     return render_template('all_items.html', items=VintedItem.query.all())
 
 if __name__ == '__main__':

@@ -47,7 +47,7 @@ a {
 }
 
 .error {
-    --color: red;
+    --color: #da1212;
 }
 
 .message-container {
@@ -72,7 +72,7 @@ a {
     width: 25rem;
     height: 3rem;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,4 +170,97 @@ a {
     border-radius: 6px;
     border: none;
     color: #434d57;
+}
+
+.go-back-container {
+    margin: 0 4rem;
+}
+
+.go-back {
+    background-color: transparent;
+    border: none;
+    font-size: 50px;
+}
+
+.go-back:hover {
+    cursor: pointer;
+}
+
+/* display items */
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 0 4rem;
+}
+
+.vinted-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 15px;
+    background-color: #e8e8e8;
+    border-radius: 15px;
+    box-shadow: 0.1px 3px 10px 5px rgba(0, 0, 0, 0.3);
+    color: #434d57;
+    width: 20rem;
+    transition: scale 0.3s;
+}
+
+.delete-container {
+    display: flex;
+    align-items: center;
+}
+
+.infos-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.vinted-item:hover {
+    cursor: pointer;
+    scale: 1.03;
+}
+
+.item-brand,
+.item-code,
+.item-size {
+    text-transform: uppercase;
+    padding-top: 8px;
+}
+
+.delete-item {
+    color: white;
+    background-color: #da1212;
+    border-radius: 6px;
+    border: none;
+    font-size: 20px;
+    margin-left: auto;
+    width: 2.5rem;
+    aspect-ratio: 1/1;
+}
+
+.delete-item:hover {
+    cursor: pointer;
+}
+
+.delete-all {
+    position: fixed;
+    top: 90%;
+    border-radius: 6px;
+    color: white;
+    background-color: #da1212;
+    width: 14rem;
+    height: 3rem;
+    margin: 0 4rem;
+    border: none;
+    font-size: 16px;
+    /* hidden when not hovered */
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0.1px 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+
+.delete-all:hover {
+    opacity: 1;
+    cursor: pointer;
 }
