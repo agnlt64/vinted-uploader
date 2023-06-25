@@ -13,12 +13,22 @@
         <h3 class="item-infos">{{ item.type.title() }} {{ item.color }}</h3>
         <span class="item-brand">{{ ' '.join(item.brand.split('_')) }}</span>
         <span class="item-size">Taille : {{ item.size }}</span>
-        <div class="delete-container">
+        <div class="button-container">
             <p class="item-code">Référence : {{ item.code }}</p>
-            <button type="button" class="delete-item" hx-delete="/items/delete/{{ item.id }}" hx-target="#body" hx-swap="innerHTML" hx-confirm="Etes-vous sûr ?">
+            <button type="button" class="action delete-item" hx-delete="/items/delete/{{ item.id }}" hx-target="#body" hx-swap="innerHTML" hx-confirm="Etes-vous sûr ?">
                 <i class='bx bxs-trash'></i>
             </button>
         </div>
+        <form class="button-container">
+            <p class="item-price">Prix : <input type="text" class="value" name="price" value="{{ item.price }}"> €</p>
+            <button type="button" class="action edit-price">
+                <i class='bx bxs-message-edit'></i>
+            </button>
+            <!-- submit button hidden by default and activated when the first one is clicked -->
+            <button type="submit" class="action submit-price hidden" hx-post="/items/edit/price/{{ item.id }}" hx-swap="innerHTML" hx-target="#body" class="hidden">
+                <i class='bx bxs-check-square'></i>
+            </button>
+        </form>
     </div>
     {% endfor %}
 </section>
@@ -31,4 +41,8 @@
     >
     Tout supprimer
 </button>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/edit_price.js') }}"></script>
 {% endblock %}

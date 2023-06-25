@@ -14,6 +14,7 @@ class VintedItem(db.Model):
     size = db.Column(db.String(5), nullable=False)
     quality = db.Column(db.String(2), nullable=False)
     code = db.Column(db.String(10), unique=True)
+    price = db.Column(db.Float, nullable=True, default=0.0)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_urlsafe(40)
@@ -60,6 +61,13 @@ def upload_item():
     if folder_name == '' and code == '':
         return render_template('index.html', folder_name='')
     return render_template('index.html', folder_name=folder_name + '_' + code)
+
+@app.route('/items/edit/price/<id>', methods=['POST'])
+def update_item_price(id):
+    item = VintedItem.query.filter_by(id=id).first()
+    item.price = request.form.get('price')
+    db.session.commit()
+    return redirect(url_for('all_items'))
 
 @app.route('/items/all')
 def all_items():

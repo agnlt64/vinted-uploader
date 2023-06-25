@@ -26,6 +26,7 @@ a {
     justify-content: flex-start;
     align-items: center;
     margin: 5px 25px;
+    width: fit-content;
 }
 
 .title:hover {
@@ -213,11 +214,6 @@ a {
     margin-bottom: 10px;
 }
 
-.delete-container {
-    display: flex;
-    align-items: center;
-}
-
 .infos-container {
     display: flex;
     flex-direction: column;
@@ -230,14 +226,19 @@ a {
 
 .item-brand,
 .item-code,
-.item-size {
+.item-size,
+.item-price {
     text-transform: uppercase;
     padding-top: 8px;
 }
 
-.delete-item {
+.vinted-item .button-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-container .action {
     color: white;
-    background-color: #da1212;
     border-radius: 6px;
     border: none;
     font-size: 20px;
@@ -246,13 +247,33 @@ a {
     aspect-ratio: 1/1;
 }
 
-.delete-item:hover {
+.button-container .delete-item {
+    background-color: #da1212;
+}
+
+.button-container .edit-price {
+    background-color: #0dcaf0;
+}
+
+.button-container .submit-price {
+    background-color: #1abf10;
+}
+
+.action:hover {
     cursor: pointer;
+}
+
+.item-price:not(.enabled) .value {
+    background-color: transparent;
+    pointer-events: none;
+    border: none;
+    width: 30px;
+    font-size: 15px;
 }
 
 .delete-all {
     position: fixed;
-    top: 90%;
+    top: 93%;
     border-radius: 6px;
     color: white;
     background-color: #da1212;
@@ -261,14 +282,11 @@ a {
     margin: 0 4rem;
     border: none;
     font-size: 16px;
-    /* hidden when not hovered */
-    opacity: 0;
     transition: opacity 0.2s;
     box-shadow: 0.1px 0 10px 5px rgba(0, 0, 0, 0.3);
 }
 
 .delete-all:hover {
-    opacity: 1;
     cursor: pointer;
 }
 
