@@ -13,6 +13,7 @@ body {
     padding: 0;
     background-color: #434d57;
     color: #bcbcbc;
+    overflow-x: hidden;
 }
 
 a {
@@ -174,8 +175,11 @@ a {
     color: #434d57;
 }
 
-.go-back-container {
-    margin: 0 4rem;
+.top-container {
+    margin: 0 0 1rem 4rem;
+    display: flex;
+    gap: 3rem;
+    width: 100%;
 }
 
 .go-back {
@@ -206,6 +210,7 @@ a {
     color: #434d57;
     width: 20rem;
     transition: scale 0.3s;
+    margin-bottom: 10px;
 }
 
 .delete-container {
@@ -265,4 +270,9 @@ a {
 .delete-all:hover {
     opacity: 1;
     cursor: pointer;
+}
+
+/* stats */
+.stats {
+    margin: 0 4rem;
 }

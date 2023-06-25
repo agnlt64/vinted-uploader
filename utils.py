@@ -1,13 +1,16 @@
+ALL_TYPES = ['jean', 'polo', 'teeshirt', 'chemise', 'bermuda', 'souspull', 'pyjama', 'bermuda', 'jogging', 'baskets']
+
 TYPES = {
     'jean': 'J',
     'polo': 'P',
     'teeshirt': 'T',
     'chemise': 'C',
     'bermuda': 'B',
-    'sous_pull': 'S',
+    'souspull': 'S',
     'pyjama': 'Y',
     'bermuda': 'B',
     'jogging': 'G',
+    'baskets': 'K',
 }
 
 BRANDS = {
@@ -40,7 +43,7 @@ QUALITY = {
 }
 
 def parse_type(type: str) -> str:
-    if type == '': return ''
+    if type == '' or type is None: return ''
     type_split = type.split(' ')
     if len(type_split) == 1:
         type_split = type.split('-')
@@ -55,7 +58,7 @@ def parse_type(type: str) -> str:
         return final
 
 def parse_brand(brand: str) -> str:
-    if brand == '': return ''
+    if brand == '' or brand is None: return ''
     brand = brand.split(' ')
     final = ''
     for word in brand:
@@ -66,7 +69,7 @@ def parse_brand(brand: str) -> str:
     return final
 
 def parse_quality(quality: str) -> str:
-    return '' if quality == '' else quality.lower()
+    return '' if quality == '' or quality is None else quality.lower()
 
 def generate_folder_name(type: str, color: str, size: str, brand: str, quality: str) -> str:
     return f'{type}_{color}_{str(size)}_{brand}_{quality}'
@@ -74,3 +77,9 @@ def generate_folder_name(type: str, color: str, size: str, brand: str, quality: 
 def generate_code(folder_name: str) -> str:
     folder_name = folder_name.split('_')
     return f'{TYPES[folder_name[0]]}{COLORS[folder_name[1]]}{folder_name[2]}{BRANDS[folder_name[3]]}{QUALITY[folder_name[-1]]}'
+
+def count_item(model, item_type: str) -> int:
+    cnt = 0
+    for _ in model.query.filter_by(type=item_type).all():
+        cnt += 1
+    return cnt

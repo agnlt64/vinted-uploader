@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import secrets
 
-from utils import parse_type, parse_brand, parse_quality, generate_code, generate_folder_name
+from utils import parse_type, parse_brand, parse_quality, generate_code, generate_folder_name, count_item, ALL_TYPES
 
 db = SQLAlchemy()
 
@@ -75,6 +75,12 @@ def delete_item(id):
 def delete_all_items():
     db.session.query(VintedItem).delete()
     return render_template('all_items.html', items=VintedItem.query.all())
+
+@app.route('/stats')
+def stats():
+    stats_list = {type : count_item(VintedItem, type) for type in ALL_TYPES}
+    print(stats_list)
+    return render_template('stats.html', stats=stats_list)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

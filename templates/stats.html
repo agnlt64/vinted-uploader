@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="top-container">
+    <button type="button" class="go-back" hx-get="/items/all" hx-swap="innerHTML" hx-target="#body">
+        <i class='bx bx-left-arrow-alt' style="color: #e8e8e8e8;"></i>
+    </button>
+</div>
+<section class="stats">
+    {% for name in stats %}
+        <p>{{ name }} : {{ stats[name] }}</p>
+    {% endfor %}
+</section>
+{% endblock %}

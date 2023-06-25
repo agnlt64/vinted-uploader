@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="go-back-container">
+<div class="top-container">
     <button type="button" class="go-back" hx-get="/" hx-swap="innerHTML" hx-target="#body">
         <i class='bx bx-left-arrow-alt' style="color: #e8e8e8e8;"></i>
     </button>
+    <button class="button" type="button" hx-get="/stats" hx-swap="innerHTML" hx-target="#body">Voir les statistiques</button>
 </div>
 <section class="items-container">
     {% for item in items %}
