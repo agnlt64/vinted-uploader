@@ -104,8 +104,10 @@
             <button type="submit" class="button">Ajouter des photos</button>
             <div class="images-container"></div>
         </div> -->
-        <button type="submit" class="button bottom" hx-post="/items/upload" hx-swap="innerHTML" hx-target="#body">Confirmer</button>
     </form>
-    <button type="submit" class="button bottom see-all" hx-get="/items/all" hx-swap="innerHTML" hx-target="#body">Voir tous les vêtements</button>
+    <div class="buttons-container">
+        <button type="submit" class="button" hx-post="/items/upload" hx-swap="innerHTML" hx-target="#body">Confirmer</button>
+        <button type="submit" class="button" hx-get="/items/all" hx-swap="innerHTML" hx-target="#body">Voir tous les vêtements</button>
+    </div>
 </section>
 {% endblock %}

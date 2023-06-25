@@ -140,9 +140,11 @@ a {
     padding-left: 1rem;
 }
 
-.bottom {
+.buttons-container {
     position: absolute;
     top: 90%;
+    display: flex;
+    gap: 3rem;
 }
 
 .see-all {
