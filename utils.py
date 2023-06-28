@@ -1,3 +1,5 @@
+from sqlalchemy.orm.attributes import InstrumentedAttribute
+
 ALL_TYPES = ['jean', 'polo', 'teeshirt', 'chemise', 'bermuda', 'souspull', 'pyjama', 'bermuda', 'jogging', 'baskets']
 
 TYPES = {
@@ -78,8 +80,23 @@ def generate_code(folder_name: str) -> str:
     folder_name = folder_name.split('_')
     return f'{TYPES[folder_name[0]]}{COLORS[folder_name[1]]}{folder_name[2]}{BRANDS[folder_name[3]]}{QUALITY[folder_name[-1]]}'
 
-def count_item(model, item_type: str) -> int:
+def count_item(model, item: str) -> int:
     cnt = 0
-    for _ in model.query.filter_by(type=item_type).all():
+    for _ in model.query.filter_by(type=item).all():
         cnt += 1
     return cnt
+
+def average_price(price_list: list) -> float:
+    if len(price_list) > 0:
+        average = 0
+        for price in price_list:
+            average += price
+        return average / len(price_list)
+    return 0.0
+
+def list_or_convert_to_list(sequence, model):
+    if type(sequence) == InstrumentedAttribute:
+        return []
+    if type(sequence) != list:
+        return model.query.with_entities(sequence).all()
+    return sequence

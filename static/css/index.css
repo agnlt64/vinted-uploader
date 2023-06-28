@@ -279,7 +279,7 @@ a {
     background-color: #da1212;
     width: 14rem;
     height: 3rem;
-    margin: 0 4rem;
+    margin: 0 3rem;
     border: none;
     font-size: 16px;
     transition: opacity 0.2s;
@@ -293,4 +293,61 @@ a {
 /* stats */
 .stats {
     margin: 0 4rem;
+}
+
+.apply-filters {
+    width: 14rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 6px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background-color: #0dcaf0;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.apply-filters:hover {
+    cursor: pointer;
+    background-color: #0aadce;
+}
+
+/* custom table */
+.table {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.table-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.table span {
+    width: 100%;
+    background-color: #007bff;
+    border: 1px solid black;
+    color: white;
+    padding: 15px;
+}
+
+.table .cols-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+
+.table .col {
+    border: 1px solid black;
+    padding: 0 15px;
+    color: black;
+    background-color: white;
 }

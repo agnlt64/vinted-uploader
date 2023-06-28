@@ -2,7 +2,17 @@ from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import secrets
 
-from utils import parse_type, parse_brand, parse_quality, generate_code, generate_folder_name, count_item, ALL_TYPES
+from utils import (
+    parse_type,
+    parse_brand,
+    parse_quality,
+    generate_code,
+    generate_folder_name,
+    count_item,
+    average_price,
+    list_or_convert_to_list,
+    ALL_TYPES
+)
 
 db = SQLAlchemy()
 
@@ -82,13 +92,62 @@ def delete_item(id):
 @app.route('/items/delete/all', methods=['DELETE'])
 def delete_all_items():
     db.session.query(VintedItem).delete()
-    return render_template('all_items.html', items=VintedItem.query.all())
+    return render_template('all_items.html', items=VintedItem)
 
 @app.route('/stats')
 def stats():
-    stats_list = {type : count_item(VintedItem, type) for type in ALL_TYPES}
-    print(stats_list)
+    stats_list = {}
+    for type in ALL_TYPES:
+        price_list = [item.price for item in VintedItem.query.filter_by(type=type).all()]
+        stats_list[type] = {
+            'name': type,
+            'total': count_item(VintedItem, type),
+            'average_price': average_price(price_list)
+        }
     return render_template('stats.html', stats=stats_list)
+
+@app.route('/items/filter', methods=['POST'])
+def filter_items():
+    request_type = request.form.get('type')
+    request_brand = request.form.get('brand')
+    request_color = request.form.get('color')
+    request_size = request.form.get('size')
+    request_quality = request.form.get('quality')
+
+    _type = parse_type(request_type)
+    brand = parse_brand(request_brand)
+    quality = parse_quality(request_quality)
+
+    if _type == '': _type = VintedItem.type
+    else: _type = VintedItem.query.filter_by(type=_type).all()
+
+    if brand == '': brand = VintedItem.brand
+    else: brand = VintedItem.query.filter_by(brand=brand).all()
+
+    if request_color == '': color = VintedItem.color
+    else: color = VintedItem.query.filter_by(color=request_color.lower()).all()
+
+    if request_size == '': size = VintedItem.size
+    else: size = VintedItem.query.filter_by(size=request_size).all()
+
+    if request_quality == '': quality = VintedItem.quality
+    else: quality = VintedItem.query.filter_by(quality=quality).all()
+
+    types = list_or_convert_to_list     (_type, VintedItem)
+    brands = list_or_convert_to_list    (brand, VintedItem)
+    colors = list_or_convert_to_list    (color, VintedItem)
+    sizes = list_or_convert_to_list     (size, VintedItem)
+    qualities = list_or_convert_to_list (quality, VintedItem)
+
+    items_list = {
+        'types': types,
+        'brands': brands,
+        'colors': colors,
+        'sizes': sizes,
+        'qualities': qualities
+    }
+
+    return render_template('filters.html', items=items_list)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

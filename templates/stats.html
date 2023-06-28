@@ -6,9 +6,109 @@
         <i class='bx bx-left-arrow-alt' style="color: #e8e8e8e8;"></i>
     </button>
 </div>
+<h2 class="info-title">Filtres</h2>
 <section class="stats">
-    {% for name in stats %}
-        <p>{{ name }} : {{ stats[name] }}</p>
-    {% endfor %}
+    <form class="infos">
+        <div class="dropdown">
+            <button type="button" class="button dropdown-button">
+                <span>Type du vêtement</span>
+                <i class='bx bxs-down-arrow'></i>
+            </button>
+            <div class="dropdown-options" data-refers-to="type">
+                <p>Jean</p>
+                <p>Polo</p>
+                <p>Tee-shirt</p>
+                <p>Chemise</p>
+                <p>Baskets</p>
+                <p>Sous-pull</p>
+                <p>Pyjama</p>
+                <p>Bermuda</p>
+                <p>Jogging</p>
+                <input type="text" class="hidden" name="type" id="type">
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button type="button" class="button dropdown-button">
+                <span>Marque</span>
+                <i class='bx bxs-down-arrow'></i>
+            </button>
+            <div class="dropdown-options" data-refers-to="brand">
+                <p>Atlas for Men</p>
+                <p>Kiabi</p>
+                <p>Tissaia</p>
+                <p>Decathlon</p>
+                <p>Puma</p>
+                <p>LH</p>
+                <p>Kaporal</p>
+                <p>Nike</p>
+                <input type="text" class="hidden" name="brand" id="brand">
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button type="button" class="button dropdown-button">
+                <span>Taille</span>
+                <i class='bx bxs-down-arrow'></i>
+            </button>
+            <div class="dropdown-options" data-refers-to="size">
+                <p>L</p>
+                <p>M</p>
+                <p>S</p>
+                <p>42</p>
+                <p>40</p>
+                <p>38</p>
+                <input type="text" class="hidden" name="size" id="size">
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button type="button" class="button dropdown-button">
+                <span>Couleur</span>
+                <i class='bx bxs-down-arrow'></i>
+            </button>
+            <div class="dropdown-options" data-refers-to="color">
+                <p>Bleu</p>
+                <p>Noir</p>
+                <p>Orange</p>
+                <p>Rouge</p>
+                <p>Vert</p>
+                <p>Jaune</p>
+                <p>Gris</p>
+                <p>Blanc</p>
+                <p>Marron</p>
+                <input type="text" class="hidden" name="color" id="color">
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button type="button" class="button dropdown-button">
+                <span>Etat</span>
+                <i class='bx bxs-down-arrow'></i>
+            </button>
+            <div class="dropdown-options" data-refers-to="quality">
+                <p>Excellent</p>
+                <p>Bon</p>
+                <p>Mauvais</p>
+                <input type="text" class="hidden" name="quality" id="quality">
+            </div>
+        </div>
+        
+        <button type="submit" 
+                class="apply-filters"
+                hx-post="/items/filter"
+                hx-swap="innerHTML"
+                hx-target="#table-container"
+                >
+            Appliquer les filtres
+        </button>
+    </form>
+    <div class="table-container" id="table-container">
+    </div>
+
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}

@@ -1,0 +1,40 @@
+<div class="table">
+    <div class="table-header">
+        <span>Type</span>
+        <span>Taille</span>
+        <span>Couleur</span>
+        <span>Marque</span>
+        <span>Etat</span>
+    </div>
+    <div class="cols-container">
+        {% for item in items.values() %}
+        {% for i in item %}
+            <div class="colgroup">
+                <div class="col">
+                    <p>{{ i.type }}</p>
+                </div>
+            </div>
+            <div class="colgroup">
+                <div class="col">
+                    <p>{{ i.size }}</p>
+                </div>
+            </div>
+            <div class="colgroup">
+                <div class="col">
+                    <p>{{ i.color }}</p>
+                </div>
+            </div>
+            <div class="colgroup">
+                <div class="col">
+                    <p>{{ i.brand }}</p>
+                </div>
+            </div>
+            <div class="colgroup">
+                <div class="col">
+                    <p>{{ i.quality }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+    </div>
+</div>
