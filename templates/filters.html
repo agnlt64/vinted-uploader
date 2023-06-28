@@ -5,6 +5,8 @@
         <span>Couleur</span>
         <span>Marque</span>
         <span>Etat</span>
+        <span>Prix</span>
+        <span>Code</span>
     </div>
     <div class="cols-container">
         {% for item in items.values() %}
@@ -32,6 +34,16 @@
             <div class="colgroup">
                 <div class="col">
                     <p>{{ i.quality }}</p>
+                </div>
+            </div>
+            <div class="colgroup">
+                <div class="col">
+                    <p>{{ i.price }}</p>
+                </div>
+            </div>
+            <div class="colgroup">
+                <div class="col">
+                    <p>{{ i.code }}</p>
                 </div>
             </div>
             {% endfor %}
