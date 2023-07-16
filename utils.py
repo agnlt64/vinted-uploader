@@ -1,6 +1,6 @@
 from sqlalchemy.orm.attributes import InstrumentedAttribute
 
-ALL_TYPES = ['jean', 'polo', 'teeshirt', 'chemise', 'bermuda', 'souspull', 'pyjama', 'bermuda', 'jogging', 'baskets']
+ALL_TYPES = ['jean', 'polo', 'teeshirt', 'chemise', 'bermuda', 'souspull', 'pyjama', 'bermuda', 'jogging', 'baskets', 'manteau', 'gants']
 
 TYPES = {
     'jean': 'J',
@@ -13,6 +13,8 @@ TYPES = {
     'bermuda': 'B',
     'jogging': 'G',
     'baskets': 'K',
+    'manteau': 'M',
+    'gants': 'A',
 }
 
 BRANDS = {
@@ -23,7 +25,23 @@ BRANDS = {
     'puma': 'P',
     'lh': 'L',
     'kaporal': 'C',
-    'nike': 'N'
+    'nike': 'N',
+    'uefa': 'U',
+    'psg': 'S',
+    'gemo': 'G',
+    'jules': 'J',
+    # la redoute
+    'la': 'R',
+    # terre de marins
+    'terre': 'M',
+    'adidas': 'I',
+    # best mountain
+    'best': 'B',
+    'ritchie': 'R',
+    # fruit of the loom
+    'fruit': 'F',
+    # oaks valley
+    'oaks': 'O',
 }
 
 COLORS = {
@@ -100,3 +118,9 @@ def list_or_convert_to_list(sequence, model):
     if type(sequence) != list:
         return model.query.with_entities(sequence).all()
     return sequence
+
+def get_quantity(model, type: str) -> int:
+    q = 0
+    for _ in model.query.filter_by(type=type):
+        q += 1
+    return q

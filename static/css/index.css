@@ -133,13 +133,19 @@ a {
 }
 
 .dropdown-options p {
-    height: 2rem;
+    height: 1.5rem;
     transition: padding-left 0.2s;
 }
 
 .dropdown-options p:hover {
     cursor: pointer;
     padding-left: 1rem;
+}
+
+.brand-dropdown .dropdown-options {
+    position: absolute;
+    top: 0;
+    width: 10rem;
 }
 
 .buttons-container {
@@ -314,6 +320,18 @@ a {
 .apply-filters:hover {
     cursor: pointer;
     background-color: #0aadce;
+}
+
+.quantities {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.quantities p {
+    font-size: 18px;
+    font-weight: 700;
+    /* width: 5rem; */
 }
 
 /* custom table */

@@ -11,6 +11,7 @@ from utils import (
     count_item,
     average_price,
     list_or_convert_to_list,
+    get_quantity,
     ALL_TYPES
 )
 
@@ -92,7 +93,8 @@ def delete_item(id):
 @app.route('/items/delete/all', methods=['DELETE'])
 def delete_all_items():
     db.session.query(VintedItem).delete()
-    return render_template('all_items.html', items=VintedItem)
+    db.session.commit()
+    return redirect(url_for('all_items'))
 
 @app.route('/stats')
 def stats():
@@ -104,7 +106,8 @@ def stats():
             'total': count_item(VintedItem, type),
             'average_price': average_price(price_list)
         }
-    return render_template('stats.html', stats=stats_list)
+    quantities = {type: get_quantity(VintedItem, type) for type in ALL_TYPES}
+    return render_template('stats.html', stats=stats_list, quantities=quantities)
 
 @app.route('/items/filter', methods=['POST'])
 def filter_items():
@@ -133,11 +136,11 @@ def filter_items():
     if request_quality == '': quality = VintedItem.quality
     else: quality = VintedItem.query.filter_by(quality=quality).all()
 
-    types = list_or_convert_to_list     (_type, VintedItem)
-    brands = list_or_convert_to_list    (brand, VintedItem)
-    colors = list_or_convert_to_list    (color, VintedItem)
-    sizes = list_or_convert_to_list     (size, VintedItem)
-    qualities = list_or_convert_to_list (quality, VintedItem)
+    types     = list_or_convert_to_list(_type,   VintedItem)
+    brands    = list_or_convert_to_list(brand,   VintedItem)
+    colors    = list_or_convert_to_list(color,   VintedItem)
+    sizes     = list_or_convert_to_list(size,    VintedItem)
+    qualities = list_or_convert_to_list(quality, VintedItem)
 
     items_list = {
         'types': types,
@@ -147,7 +150,9 @@ def filter_items():
         'qualities': qualities
     }
 
-    return render_template('filters.html', items=items_list)
+    quantities = {type: get_quantity(VintedItem, type) for type in ALL_TYPES}
+
+    return render_template('filters.html', items=items_list, quantities=quantities)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

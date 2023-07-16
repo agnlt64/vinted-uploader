@@ -24,11 +24,13 @@
                     <p>Pyjama</p>
                     <p>Bermuda</p>
                     <p>Jogging</p>
+                    <p>Manteau</p>
+                    <p>Gants</p>
                     <input type="text" class="hidden" name="type" id="type">
                 </div>
             </div>
 
-            <div class="dropdown">
+            <div class="dropdown brand-dropdown">
                 <button type="button" class="button dropdown-button">
                     <span>Marque</span>
                     <i class='bx bxs-down-arrow'></i>
@@ -42,6 +44,17 @@
                     <p>LH</p>
                     <p>Kaporal</p>
                     <p>Nike</p>
+                    <p>UEFA</p>
+                    <p>PSG</p>
+                    <p>Gemo</p>
+                    <p>Jules</p>
+                    <p>La Redoute</p>
+                    <p>Terre de Marins</p>
+                    <p>Adidas</p>
+                    <p>Best Mountain</p>
+                    <p>Ritchie</p>
+                    <p>Fruit of the Loom</p>
+                    <p>Oaks Valley</p>
                     <input type="text" class="hidden" name="brand" id="brand">
                 </div>
             </div>
@@ -107,6 +120,7 @@
         <div class="buttons-container">
             <button type="submit" class="button" hx-post="/items/upload" hx-swap="innerHTML" hx-target="#body">Confirmer</button>
             <button type="submit" class="button" hx-get="/items/all" hx-swap="innerHTML" hx-target="#body">Voir tous les vêtements</button>
+            <button type="submit" class="button" hx-get="/stats" hx-swap="innerHTML" hx-target="#body">Voir les statistiques</button>
         </div>
     </form>
 </section>
